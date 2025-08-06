@@ -1,0 +1,13 @@
+ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p output_encoding:=yuv422_yuy2 -p pixel_format:=UYVY -p video_device:=/dev/video7
+
+ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p pixel_format:=UYVY -p video_device:=/dev/video7
+
+ros2 launch v4l2_camera camera_launcher.launch.py
+
+sudo phc2sys -c CLOCK_REALTIME -s /dev/ptp0 -O 0 --step_threshold=1 -m
+
+sudo ptp4l -i enp7s0 -m -s -2 -H
+
+ros2 launch rosbridge_server rosbridge_websocket_launch.xml max_message_size:=Inf
+
+v4l2-ctl --stream-mmap --stream-count=3 -d /dev/video2 --verbose

@@ -1,0 +1,40 @@
+# camera_groups_config.yaml
+# 自定义相机设备组配置文件
+
+camera_groups:
+  fisheye:
+    devices:
+      - "/dev/video0"
+      - "/dev/video1" 
+      - "/dev/video2"
+      - "/dev/video3"
+    topic_prefix: "/fisheye"
+    width: 1920
+    height: 1500
+    frame_rate: 10   # 高分辨率使用更低帧率
+    
+  surround:
+    devices:
+      - "/dev/video8"
+      - "/dev/video9"
+      - "/dev/video10"
+      - "/dev/video11"
+      - "/dev/video12"
+      - "/dev/video13"
+    topic_prefix: "/surround"
+    width: 1920
+    height: 1500
+    frame_rate: 10   # 环视摄像头低帧率
+    
+  front:
+    devices:
+      - "/dev/video5"
+    topic_prefix: "/front"
+    width: 1920
+    height: 1500
+    frame_rate: 10  # 前视摄像头较高帧率
+
+# 全局设置
+global_settings:
+  container_name: "multi_camera_container"
+  use_intra_process_comms: true
